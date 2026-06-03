@@ -2,7 +2,7 @@
 GITHUB_USERNAME=sheilallee
 GITHUB_EMAIL=sheilalee.lima@gmail.com
 
-SERVICE_NAME=order
+SERVICE_NAME="${1:-order}"
 RELEASE_VERSION=v1.2.3
 
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
@@ -11,7 +11,7 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 
 echo "Generating Go source code"
 mkdir -p golang
-protoc --go_out=./golang \
+protoc --proto_path=. --go_out=./golang \
   --go_opt=paths=source_relative \
   --go-grpc_out=./golang \
   --go-grpc_opt=paths=source_relative \
